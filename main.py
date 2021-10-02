@@ -1,9 +1,13 @@
 from solu import solu
 from ruudukko import ruudukko
 from random import randrange
+from tkinter import Tk, ttk
+import tkinter
 
-koko = 90
-ruutus = ruudukko(koko)
+root = Tk()
+root.title("TkInter example")
+koko = 5
+ruutus = ruudukko(koko,root)
 ruutus.luo()
 
 tamanhetkinensolu = None
@@ -15,6 +19,7 @@ lista.append(aloitusruutu)
 while len(lista) > 0:
     viereiset = []
     nykyinensolu = lista[-1]
+    tkinter.Label(root, text="käyty", borderwidth=1 ).grid(row=nykyinensolu.y,column=nykyinensolu.x)
     lista.pop()
     if nykyinensolu.y == 0:
         pass
@@ -38,3 +43,6 @@ while len(lista) > 0:
         seuraavasolu.oltujo = True
         lista.append(seuraavasolu)
         print(seuraavasolu.koordinaatit())
+    root.update()
+
+root.mainloop()
