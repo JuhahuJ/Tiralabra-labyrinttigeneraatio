@@ -6,24 +6,12 @@ import tkinter
 from PIL import Image, ImageTk
 
 root = Tk()
-frame = Frame(root)
-frame.pack()
-
-
-canvas = Canvas(frame)
-canvas.pack()
-
-
-root.photo = photo = tkinter.PhotoImage(file="y.png")
-root.photo2 = photo2 = tkinter.PhotoImage(file="v.png")
-canvas.create_image(0, 0, image=photo)
-canvas.create_image(0, 0, image=photo2)
-
-root.mainloop()
 koko = 5
 ruutus = ruudukko(koko,root)
 ruutus.luo()
 
+photo = tkinter.PhotoImage(file="y.png")
+photo2 = tkinter.PhotoImage(file="v.png")
 
 tamanhetkinensolu = None
 lista = []
