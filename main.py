@@ -9,12 +9,13 @@ root = Tk()
 koko = 5
 ruutus = ruudukko(koko,root)
 ruutus.luo()
-canvas = tkinter.Canvas(root)
-canvas.pack
+canvas = tkinter.Canvas(root, width = 300, height = 300)
+canvas.pack()
 
-root.photo = photo = tkinter.PhotoImage(file="y.gif")
-root.photo2 = photo2 = tkinter.PhotoImage(file="v.gif")
-
+root.photo = photo = tkinter.PhotoImage(file="y.png")
+root.photo2 = photo2 = tkinter.PhotoImage(file="v.png")
+canvas.create_image(0, 0, image=photo)
+canvas.create_image(0, 0, image=photo2)
 tamanhetkinensolu = None
 lista = []
 
@@ -48,11 +49,10 @@ while len(lista) > 0:
         lista.append(seuraavasolu)
         print(seuraavasolu.koordinaatit())
 
-kuva = tkinter.Label(root, image=photo, borderwidth=1 )
+kuva = tkinter.Label(root, image=photo)
 kuva.grid(row=0,column=0)
-kuva2 = tkinter.Label(root, image=photo2, borderwidth=1 )
-kuva2.grid(row=0,column=0)
-canvas.create_image((0, 0), image=photo)
-canvas.create_image((0, 0), image=photo2)
+kuva2 = tkinter.Label(root, image=photo2)
+kuva2.grid(row=0,column=1)
+
 
 root.mainloop()

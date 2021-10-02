@@ -13,5 +13,5 @@ class ruudukko:
             for j in range(self.koko):
                 solus = solu(i,j)
                 apulista.append(solus)
-                tkinter.Label(self.root, text='y%s/x%s'%(j,i), borderwidth=1 ).grid(row=j,column=i)
+                tkinter.Label(self.root, text='y%s/x%s'%(j,i) ).grid(row=j,column=i)
             self.ruudut.append(apulista)
