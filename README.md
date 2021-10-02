@@ -7,3 +7,5 @@
 [Viikkoraportti 2](https://github.com/JuhahuJ/Tiralabra-labyrinttigeneraatio/blob/main/dokumentaatio/Viikkoraportti2.md)
 
 [Viikkoraportti 3](https://github.com/JuhahuJ/Tiralabra-labyrinttigeneraatio/blob/main/dokumentaatio/Viikkoraportti3.md)
+
+[Viikkoraportti 4](https://github.com/JuhahuJ/Tiralabra-labyrinttigeneraatio/blob/main/dokumentaatio/Viikkoraportti4.md)
