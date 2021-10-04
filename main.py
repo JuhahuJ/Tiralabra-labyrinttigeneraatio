@@ -6,12 +6,21 @@ import tkinter
 from PIL import Image, ImageTk
 
 root = Tk()
-koko = 5
-ruutus = ruudukko(koko,root)
-ruutus.luo()
+koko = 300
+canvas = Canvas(root, width = koko*20+10, height =koko*20+10, bg="white")
+canvas.pack()
 
-photo = tkinter.PhotoImage(file="y.png")
-photo2 = tkinter.PhotoImage(file="v.png")
+ruutus = ruudukko(koko)
+ruutus.luo()
+paikka = 0
+
+for i in range(koko+1):
+    canvas.create_line(paikka*20+5, 5, paikka*20+5, 20*koko+5)
+    paikka += 1
+paikka = 0
+for j in range(koko+1):
+    canvas.create_line(5, paikka*20+5, 20*koko+5, paikka*20+5)
+    paikka += 1
 
 tamanhetkinensolu = None
 lista = []
@@ -44,12 +53,13 @@ while len(lista) > 0:
         seuraavasolu = viereiset[randrange(len(viereiset))]
         seuraavasolu.oltujo = True
         lista.append(seuraavasolu)
-        print(seuraavasolu.koordinaatit())
-
-kuva = tkinter.Label(root, image=photo)
-kuva.grid(row=0,column=0)
-kuva2 = tkinter.Label(root, image=photo2)
-kuva2.grid(row=0,column=1)
-
+        if seuraavasolu.x > nykyinensolu.x:
+            canvas.create_line(seuraavasolu.x*20+5, nykyinensolu.y*20+6, seuraavasolu.x*20+5, seuraavasolu.y*20+25, fill="white")
+        if seuraavasolu.x < nykyinensolu.x:
+            canvas.create_line(nykyinensolu.x*20+5, nykyinensolu.y*20+6, nykyinensolu.x*20+5, seuraavasolu.y*20+25, fill="white")
+        if seuraavasolu.y > nykyinensolu.y:
+            canvas.create_line(nykyinensolu.x*20+6, seuraavasolu.y*20+5, seuraavasolu.x*20+25, seuraavasolu.y*20+5, fill="white")
+        if seuraavasolu.y < nykyinensolu.y:
+            canvas.create_line(nykyinensolu.x*20+6, nykyinensolu.y*20+5, seuraavasolu.x*20+25, nykyinensolu.y*20+5, fill="white")
 
 root.mainloop()
