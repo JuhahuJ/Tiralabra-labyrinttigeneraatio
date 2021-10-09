@@ -1,5 +1,6 @@
 /Tiralabra-labyrinttigeneraatio/nbproject/private/
-__pycache__
+koodi/__pycache__
 .pytest_cache
 .coverage
 /koodi/testaus/__pycache__
+koodi/ui/__pycache__
