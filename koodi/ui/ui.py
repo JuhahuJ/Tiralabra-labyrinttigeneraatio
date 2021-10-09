@@ -1,6 +1,6 @@
 from tkinter import Tk
-from aloitusikkuna import AloitusIkkuna
-from syvyyshakuikkuna import SyvyyshakuIkkuna
+from ui.aloitusikkuna import AloitusIkkuna
+from ui.syvyyshakuikkuna import SyvyyshakuIkkuna
 
 class UI:
     def __init__(self,root):
@@ -34,9 +34,3 @@ class UI:
     def _avaa_uudelleen(self, koko):
         self._avaa_syvyyshaku_ikkuna(koko)
 
-ikkuna = Tk()
-
-ui = UI(ikkuna)
-ui.alku()
-
-ikkuna.mainloop()

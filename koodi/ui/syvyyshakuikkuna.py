@@ -1,5 +1,5 @@
-from solu import solu
-from ruudukko import ruudukko
+from solu import Solu
+from ruudukko import Ruudukko
 from random import randrange
 from tkinter import ttk, Canvas
 import tkinter
@@ -24,7 +24,7 @@ class SyvyyshakuIkkuna:
         canvas = Canvas(self._frame, width = self.koko*20+10, height =self.koko*20+10, bg="white")
         canvas.pack()
 
-        ruutus = ruudukko(self.koko)
+        ruutus = Ruudukko(self.koko)
         ruutus.luo()
         paikka = 0
 
