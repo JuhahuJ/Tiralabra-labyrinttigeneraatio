@@ -6,7 +6,7 @@ import tkinter
 from PIL import Image, ImageTk
 
 root = Tk()
-koko = 300
+koko = 9
 canvas = Canvas(root, width = koko*20+10, height =koko*20+10, bg="white")
 canvas.pack()
 
@@ -25,7 +25,7 @@ for j in range(koko+1):
 tamanhetkinensolu = None
 lista = []
 
-aloitusruutu = ruutus.ruudut[0][0]
+aloitusruutu = ruutus.ruudut[randrange(koko)][randrange(koko)]
 aloitusruutu.oltujo = True
 lista.append(aloitusruutu)
 while len(lista) > 0:
