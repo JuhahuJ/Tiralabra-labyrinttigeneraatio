@@ -3,7 +3,6 @@ from ruudukko import ruudukko
 from random import randrange
 from tkinter import *
 import tkinter
-from PIL import Image, ImageTk
 
 root = Tk()
 koko = 9

@@ -9,8 +9,10 @@ class ruudukko:
 
     def luo(self):
         for i in range(self.koko):
+            self.ruudut.append("väliaikainen arvo")
             apulista = []
             for j in range(self.koko):
-                solus = solu(i,j)
+                solus = solu(i, j)
                 apulista.append(solus)
-            self.ruudut.append(apulista)
+            self.ruudut[i] = apulista
+        
