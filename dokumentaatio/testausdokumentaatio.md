@@ -1,4 +1,4 @@
-#Ohjelman testaus ja testikattavuusraportti
+# Ohjelman testaus ja testikattavuusraportti
 
 Ohjelman testaus on suoritettu Pytestillä, jonka avulla on luotu myös testikattavuusraportti.
 Sen saa auki htmlcov kansiosta avaamalla tiedoston index.html. 
