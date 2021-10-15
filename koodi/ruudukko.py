@@ -2,10 +2,9 @@ from solu import Solu
 
 
 class Ruudukko:
-    def __init__(self,koko:int,ruudut=[]):
+    def __init__(self, koko: int, ruudut=[]):
         self.koko = koko
         self.ruudut = ruudut
-        
 
     def luo(self):
         self.ruudut = []
@@ -16,4 +15,3 @@ class Ruudukko:
                 solus = Solu(i, j)
                 apulista.append(solus)
             self.ruudut[i] = apulista
-        

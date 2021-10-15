@@ -1,6 +1,7 @@
 from tkinter import ttk, constants
 import tkinter
 
+
 class AloitusIkkuna:
     def __init__(self, root, syvyyshaku_kasittely):
         self._root = root
@@ -16,19 +17,21 @@ class AloitusIkkuna:
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
-        label = ttk.Label(master=self._frame, text="Tervetuloa labyrinttigeneraattoriin!")
+        label = ttk.Label(master=self._frame,
+                          text="Tervetuloa labyrinttigeneraattoriin!")
 
         valittu_arvo = tkinter.StringVar(self._frame)
         valittu_arvo.set(3)
 
         val_lista = [3, 4, 5, 6, 7, 8, 9, 15, 24, 33, 38]
 
-        koko_valinta = tkinter.OptionMenu(self._frame, valittu_arvo, *val_lista)
+        koko_valinta = tkinter.OptionMenu(
+            self._frame, valittu_arvo, *val_lista)
 
         button = ttk.Button(
             master=self._frame,
             text="Luo labyrintti syvyyshaulla",
-            command=lambda : self._syvyyshaku_kasittely(valittu_arvo.get())
+            command=lambda: self._syvyyshaku_kasittely(valittu_arvo.get())
         )
 
         label.grid(row=0, column=0)
