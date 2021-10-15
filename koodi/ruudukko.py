@@ -1,4 +1,5 @@
 from solu import Solu
+from copy import copy
 
 
 class Ruudukko:
@@ -20,12 +21,31 @@ class Ruudukko:
 
         Ylemmässä silmukassa: korvaa väliaikaisen arvon apulistalla.
         '''
-        
+
         self.ruudut = []
         for i in range(self.koko):
             self.ruudut.append("väliaikainen arvo")
             apulista = []
             for j in range(self.koko):
                 solu = Solu(i, j)
+                solu.luo_seinat()
                 apulista.append(solu)
             self.ruudut[i] = apulista
+
+    def vastakkainen_seina(self, seina):
+        if seina.suunta == "ylä":
+            viereiset = copy(seina)
+            viereiset.y -= 1
+            return viereiset
+        elif seina.suunta == "ala":
+            viereiset = copy(seina)
+            viereiset.y += 1
+            return viereiset
+        elif seina.suunta == "vasen":
+            viereiset = copy(seina)
+            viereiset.x -= 1
+            return viereiset
+        elif seina.suunta == "oikea":
+            viereiset = copy(seina)
+            viereiset.x += 1
+            return viereiset
