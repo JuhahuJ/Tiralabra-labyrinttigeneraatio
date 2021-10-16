@@ -1,5 +1,5 @@
-from solu import Solu
 from copy import copy
+from solu import Solu
 
 
 class Ruudukko:
@@ -37,15 +37,15 @@ class Ruudukko:
             viereiset = copy(seina)
             viereiset.y -= 1
             return viereiset
-        elif seina.suunta == "ala":
+        if seina.suunta == "ala":
             viereiset = copy(seina)
             viereiset.y += 1
             return viereiset
-        elif seina.suunta == "vasen":
+        if seina.suunta == "vasen":
             viereiset = copy(seina)
             viereiset.x -= 1
             return viereiset
-        elif seina.suunta == "oikea":
+        if seina.suunta == "oikea":
             viereiset = copy(seina)
             viereiset.x += 1
             return viereiset

@@ -1,5 +1,6 @@
 from seina import Seina
 
+
 class Solu:
     '''Solu olio, joka saa arvot x, y ja oltujo'''
 

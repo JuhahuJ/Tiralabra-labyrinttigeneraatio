@@ -6,11 +6,11 @@ import tkinter
 
 
 class SyvyyshakuIkkuna:
-    def __init__(self, root, aloitus_kasittely, avaa_uudelleen, koko):
+    def __init__(self, root, aloitus_kasittely, avaa_uudelleen_syvyys, koko):
         self._root = root
         self._frame = None
         self._aloitus_kasittely = aloitus_kasittely
-        self._avaa_uudelleen = avaa_uudelleen
+        self._avaa_uudelleen_syvyys = avaa_uudelleen_syvyys
         self.koko = int(koko)
         self._initialize()
 
@@ -96,5 +96,5 @@ class SyvyyshakuIkkuna:
         button2 = ttk.Button(
             master=self._frame,
             text="Luo uusi labyrintti",
-            command=lambda: self._avaa_uudelleen(self.koko)
+            command=lambda: self._avaa_uudelleen_syvyys(self.koko)
         ).pack()

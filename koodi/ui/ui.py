@@ -1,6 +1,7 @@
 from tkinter import Tk
 from ui.aloitusikkuna import AloitusIkkuna
 from ui.syvyyshakuikkuna import SyvyyshakuIkkuna
+from ui.primikkuna import PrimIkkuna
 
 
 class UI:
@@ -19,7 +20,7 @@ class UI:
     def _avaa_aloitus_ikkuna(self):
         self._piilota_nykyinen_ikkuna()
         self._nykyinen_ikkuna = AloitusIkkuna(
-            self._root, self._syvyyshaku_kasittely)
+            self._root, self._syvyyshaku_kasittely, self._prim_kasittely,)
         self._nykyinen_ikkuna.pack()
 
     def _syvyyshaku_kasittely(self, koko):
@@ -31,8 +32,20 @@ class UI:
     def _avaa_syvyyshaku_ikkuna(self, koko):
         self._piilota_nykyinen_ikkuna()
         self._nykyinen_ikkuna = SyvyyshakuIkkuna(
-            self._root, self._aloitus_kasittely, self._avaa_uudelleen, koko)
+            self._root, self._aloitus_kasittely, self._avaa_uudelleen_syvyys, koko)
         self._nykyinen_ikkuna.pack()
 
-    def _avaa_uudelleen(self, koko):
+    def _avaa_uudelleen_syvyys(self, koko):
         self._avaa_syvyyshaku_ikkuna(koko)
+
+    def _avaa_uudelleen_prim(self, koko):
+        self._avaa_prim_ikkuna(koko)
+
+    def _avaa_prim_ikkuna(self, koko):
+        self._piilota_nykyinen_ikkuna()
+        self._nykyinen_ikkuna = PrimIkkuna(
+            self._root, self._aloitus_kasittely, self._avaa_uudelleen_prim, koko)
+        self._nykyinen_ikkuna.pack()
+
+    def _prim_kasittely(self, koko):
+        self._avaa_prim_ikkuna(koko)
