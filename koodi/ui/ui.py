@@ -2,6 +2,7 @@ from tkinter import Tk
 from ui.aloitusikkuna import AloitusIkkuna
 from ui.syvyyshakuikkuna import SyvyyshakuIkkuna
 from ui.primikkuna import PrimIkkuna
+from ui.binaaripuuikkuna import BinaaripuuIkkuna
 
 
 class UI:
@@ -20,7 +21,7 @@ class UI:
     def _avaa_aloitus_ikkuna(self):
         self._piilota_nykyinen_ikkuna()
         self._nykyinen_ikkuna = AloitusIkkuna(
-            self._root, self._syvyyshaku_kasittely, self._prim_kasittely,)
+            self._root, self._syvyyshaku_kasittely, self._prim_kasittely, self._binaaripuu_kasittely,)
         self._nykyinen_ikkuna.pack()
 
     def _syvyyshaku_kasittely(self, koko):
@@ -49,3 +50,15 @@ class UI:
 
     def _prim_kasittely(self, koko):
         self._avaa_prim_ikkuna(koko)
+
+    def _avaa_uudelleen_binaaripuu(self, koko):
+        self._avaa_binaaripuu_ikkuna(koko)
+
+    def _avaa_binaaripuu_ikkuna(self, koko):
+        self._piilota_nykyinen_ikkuna()
+        self._nykyinen_ikkuna = BinaaripuuIkkuna(
+            self._root, self._aloitus_kasittely, self._avaa_uudelleen_binaaripuu, koko)
+        self._nykyinen_ikkuna.pack()
+
+    def _binaaripuu_kasittely(self, koko):
+        self._avaa_binaaripuu_ikkuna(koko)

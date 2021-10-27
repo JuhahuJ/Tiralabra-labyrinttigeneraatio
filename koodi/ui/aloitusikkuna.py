@@ -3,11 +3,12 @@ import tkinter
 
 
 class AloitusIkkuna:
-    def __init__(self, root, syvyyshaku_kasittely, prim_kasittely):
+    def __init__(self, root, syvyyshaku_kasittely, prim_kasittely, binaaripuu_kasittely):
         self._root = root
         self._frame = None
         self._syvyyshaku_kasittely = syvyyshaku_kasittely
         self._prim_kasittely = prim_kasittely
+        self._binaaripuu_kasittely = binaaripuu_kasittely
         self._initialize()
 
     def pack(self):
@@ -41,7 +42,14 @@ class AloitusIkkuna:
             command=lambda: self._prim_kasittely(valittu_arvo.get())
         )
 
+        button3 = ttk.Button(
+            master=self._frame,
+            text="Luo labyrintti binääripuu algoritmilla",
+            command=lambda: self._binaaripuu_kasittely(valittu_arvo.get())
+        )
+
         label.grid(row=0, column=0)
         button.grid(row=1, column=0)
         button2.grid(row=2, column=0)
+        button3.grid(row=3, column=0)
         koko_valinta.grid(row=1, column=1)
