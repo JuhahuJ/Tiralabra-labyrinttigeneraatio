@@ -1,7 +1,8 @@
 from ruudukko import Ruudukko
-from random import choice, randrange
+from random import choice
 from tkinter import ttk, Canvas
 import tkinter
+from time import sleep
 
 
 class PrimIkkuna:
@@ -18,6 +19,14 @@ class PrimIkkuna:
 
     def destroy(self):
         self._frame.destroy()
+
+    def nayta_miten_luotu(self, canvas, lapikaynti):
+        canvas.create_rectangle(lapikaynti[0].x*20+7, lapikaynti[0].y*20+7, lapikaynti[0].x*20+23, lapikaynti[0].y*20+23,fill="green")
+        for solu in range(len(lapikaynti)):
+            canvas.create_rectangle(lapikaynti[solu].x*20+12, lapikaynti[solu].y*20+12, lapikaynti[solu].x*20+18, lapikaynti[solu].y*20+18,fill="blue")
+            canvas.create_rectangle(lapikaynti[solu-1].x*20+10, lapikaynti[solu-1].y*20+10, lapikaynti[solu-1].x*20+20, lapikaynti[solu-1].y*20+20,fill="red")
+            self._root.update()
+            sleep(0.1)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -46,6 +55,7 @@ class PrimIkkuna:
         apulista.append(solu.oik)
         apulista.append(solu.yl)
         apulista.append(solu.al)
+        lapikaynti = [solu]
 
         while len(apulista) > 0:
             valittuseina = choice(apulista)
@@ -83,6 +93,7 @@ class PrimIkkuna:
                         canvas.create_line(valittusolu.x*20+5, valittusolu.y*20+6,
                                            valittusolu.x*20+5, valittusolu.y*20+25, fill="white")
                     solu = valittusolu
+                    lapikaynti.append(solu)
             apulista.remove(valittuseina)
 
         button = ttk.Button(
@@ -94,4 +105,9 @@ class PrimIkkuna:
             master=self._frame,
             text="Luo uusi labyrintti",
             command=lambda: self._avaa_uudelleen_prim(self.koko)
+        ).pack()
+        button3 = ttk.Button(
+            master=self._frame,
+            text="Näytä labyrintin luominen",
+            command=lambda: self.nayta_miten_luotu(canvas, lapikaynti)
         ).pack()

@@ -3,6 +3,7 @@ from ruudukko import Ruudukko
 from random import randrange
 from tkinter import ttk, Canvas
 import tkinter
+from time import sleep
 
 
 class SyvyyshakuIkkuna:
@@ -19,6 +20,14 @@ class SyvyyshakuIkkuna:
 
     def destroy(self):
         self._frame.destroy()
+
+    def nayta_miten_luotu(self, canvas, lapikaynti):
+        canvas.create_rectangle(lapikaynti[0].x*20+7, lapikaynti[0].y*20+7, lapikaynti[0].x*20+23, lapikaynti[0].y*20+23,fill="green")
+        for solu in range(len(lapikaynti)):
+            canvas.create_rectangle(lapikaynti[solu].x*20+12, lapikaynti[solu].y*20+12, lapikaynti[solu].x*20+18, lapikaynti[solu].y*20+18,fill="blue")
+            canvas.create_rectangle(lapikaynti[solu-1].x*20+10, lapikaynti[solu-1].y*20+10, lapikaynti[solu-1].x*20+20, lapikaynti[solu-1].y*20+20,fill="red")
+            self._root.update()
+            sleep(0.1)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -40,15 +49,16 @@ class SyvyyshakuIkkuna:
 
         tamanhetkinensolu = None
         lista = []
+        lapikaynti = []
 
         aloitusruutu = ruutus.ruudut[randrange(
             self.koko)][randrange(self.koko)]
         aloitusruutu.oltujo = True
         lista.append(aloitusruutu)
-        apu = 0
         while len(lista) > 0:
             viereiset = []
             nykyinensolu = lista[-1]
+            lapikaynti.append(nykyinensolu)
             lista.pop()
             if nykyinensolu.y == 0:
                 pass
@@ -97,4 +107,9 @@ class SyvyyshakuIkkuna:
             master=self._frame,
             text="Luo uusi labyrintti",
             command=lambda: self._avaa_uudelleen_syvyys(self.koko)
+        ).pack()
+        button3 = ttk.Button(
+            master=self._frame,
+            text="Näytä labyrintin luominen",
+            command=lambda: self.nayta_miten_luotu(canvas, lapikaynti)
         ).pack()
