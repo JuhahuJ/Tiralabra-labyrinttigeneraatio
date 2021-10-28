@@ -36,7 +36,6 @@ class BinaaripuuIkkuna:
         canvas.pack()
 
         ruudukko = Ruudukko(self.koko)
-        ruudukko.luo()
 
         paikka = 0
 

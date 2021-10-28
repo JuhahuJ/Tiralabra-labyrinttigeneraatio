@@ -36,7 +36,6 @@ class SyvyyshakuIkkuna:
         canvas.pack()
 
         ruutus = Ruudukko(self.koko)
-        ruutus.luo()
         paikka = 0
 
         for i in range(self.koko+1):

@@ -8,6 +8,7 @@ class Ruudukko:
     def __init__(self, koko: int, ruudut=[]):
         self.koko = koko
         self.ruudut = ruudut
+        self.luo()
 
     def luo(self):
         '''Täyttää ruudut soluilla perustuen annettuun kokoon, jolloin ruudukossa on koko*koko solua.
