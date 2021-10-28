@@ -21,10 +21,28 @@ class PrimIkkuna:
         self._frame.destroy()
 
     def nayta_miten_luotu(self, canvas, lapikaynti):
-        canvas.create_rectangle(lapikaynti[0].x*20+7, lapikaynti[0].y*20+7, lapikaynti[0].x*20+23, lapikaynti[0].y*20+23,fill="green")
-        for solu in range(len(lapikaynti)):
-            canvas.create_rectangle(lapikaynti[solu].x*20+12, lapikaynti[solu].y*20+12, lapikaynti[solu].x*20+18, lapikaynti[solu].y*20+18,fill="blue")
-            canvas.create_rectangle(lapikaynti[solu-1].x*20+10, lapikaynti[solu-1].y*20+10, lapikaynti[solu-1].x*20+20, lapikaynti[solu-1].y*20+20,fill="red")
+        paikka = 0
+        for i in range(self.koko+1):
+            canvas.create_line(paikka*20+5, 5, paikka*20+5, 20*self.koko+5)
+            paikka += 1
+        paikka = 0
+        for j in range(self.koko+1):
+            canvas.create_line(5, paikka*20+5, 20*self.koko+5, paikka*20+5)
+            paikka += 1
+        laskuri = 0
+        for k in lapikaynti:
+            if k[1] == "ala":
+                canvas.create_line(k[0].x*20+6, k[0].y*20+5,
+                                    k[0].x*20+25, k[0].y*20+5, fill="white")
+            if k[1] == "ylä":
+                canvas.create_line(k[0].x*20+6, (k[0].y+1)*20+5,
+                                    k[0].x*20+25, (k[0].y+1)*20+5, fill="white")
+            if k[1] == "vasen":
+                canvas.create_line((k[0].x+1)*20+5, k[0].y*20+6,
+                                    (k[0].x+1)*20+5, k[0].y*20+25, fill="white")
+            if k[1] == "oikea":
+                canvas.create_line(k[0].x*20+5, k[0].y*20+6,
+                                    k[0].x*20+5, k[0].y*20+25, fill="white")        
             self._root.update()
             sleep(0.1)
 
@@ -54,7 +72,7 @@ class PrimIkkuna:
         apulista.append(solu.oik)
         apulista.append(solu.yl)
         apulista.append(solu.al)
-        lapikaynti = [solu]
+        lapikaynti = []
 
         while len(apulista) > 0:
             valittuseina = choice(apulista)
@@ -68,6 +86,7 @@ class PrimIkkuna:
                         apulista.append(valittusolu.oik)
                         apulista.append(valittusolu.yl)
                         valittusolu.oltujo = True
+                        lapikaynti.append([valittusolu,valittuseina.suunta])
                         canvas.create_line(valittusolu.x*20+6, valittuseina.y*20+5,
                                            valittusolu.x*20+25, valittuseina.y*20+5, fill="white")
                     elif valittuseina.suunta == "ala":
@@ -75,6 +94,7 @@ class PrimIkkuna:
                         apulista.append(valittusolu.oik)
                         apulista.append(valittusolu.al)
                         valittusolu.oltujo = True
+                        lapikaynti.append([valittusolu,valittuseina.suunta])
                         canvas.create_line(valittusolu.x*20+6, valittusolu.y*20+5,
                                            valittusolu.x*20+25, valittusolu.y*20+5, fill="white")
                     elif valittuseina.suunta == "vasen":
@@ -82,6 +102,7 @@ class PrimIkkuna:
                         apulista.append(valittusolu.al)
                         apulista.append(valittusolu.yl)
                         valittusolu.oltujo = True
+                        lapikaynti.append([valittusolu,valittuseina.suunta])
                         canvas.create_line(valittuseina.x*20+5, valittusolu.y*20+6,
                                            valittuseina.x*20+5, valittusolu.y*20+25, fill="white")
                     elif valittuseina.suunta == "oikea":
@@ -89,10 +110,10 @@ class PrimIkkuna:
                         apulista.append(valittusolu.oik)
                         apulista.append(valittusolu.yl)
                         valittusolu.oltujo = True
+                        lapikaynti.append([valittusolu,valittuseina.suunta])
                         canvas.create_line(valittusolu.x*20+5, valittusolu.y*20+6,
                                            valittusolu.x*20+5, valittusolu.y*20+25, fill="white")
                     solu = valittusolu
-                    lapikaynti.append(solu)
             apulista.remove(valittuseina)
 
         button = ttk.Button(
