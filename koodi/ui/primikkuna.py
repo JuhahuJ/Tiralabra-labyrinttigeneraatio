@@ -1,5 +1,5 @@
 from ruudukko import Ruudukko
-from random import choice
+from random import choice, randrange
 from tkinter import ttk, Canvas
 import tkinter
 from time import sleep
@@ -66,7 +66,7 @@ class PrimIkkuna:
 
         apulista = []
 
-        solu = ruudukko.ruudut[0][0]
+        solu = ruudukko.ruudut[randrange(self.koko)][randrange(self.koko)]
         solu.oltujo = True
         apulista.append(solu.vas)
         apulista.append(solu.oik)
