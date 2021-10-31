@@ -1,3 +1,3 @@
 [run]
 source = koodi
-omit = koodi/testaus/__init__.py, koodi/testaus/soluruudukko_test.py, koodi/ui/, koodi/main.py, koodi/labyrintit/__init__.py, koodi/oliot/__init__.py
+omit = koodi/testaus/__init__.py, koodi/testaus/soluruudukko_test.py, koodi/ui/, koodi/main.py, koodi/labyrintit/__init__.py, koodi/oliot/__init__.py, koodi/testaus/labyrintit_test.py, koodi/suorituskyky.py
