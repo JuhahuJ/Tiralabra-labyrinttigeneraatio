@@ -1,5 +1,5 @@
 from copy import copy
-from solu import Solu
+from oliot.solu import Solu
 
 
 class Ruudukko:

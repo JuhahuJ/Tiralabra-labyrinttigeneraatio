@@ -1,5 +1,5 @@
 from random import randrange, choice
-from ruudukko import Ruudukko
+from oliot.ruudukko import Ruudukko
 
 
 class Prim:

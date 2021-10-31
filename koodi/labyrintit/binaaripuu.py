@@ -1,5 +1,5 @@
 from random import choice
-from ruudukko import Ruudukko
+from oliot.ruudukko import Ruudukko
 
 
 class Binaaripuu:
