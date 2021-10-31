@@ -2,10 +2,12 @@ from random import choice, randrange
 from tkinter import ttk, Canvas
 import tkinter
 from time import sleep
-from ruudukko import Ruudukko
+from labyrintit.prim import Prim
 
 
 class PrimIkkuna:
+    """Luokka, joka vastaa labyrintin luomisesta ja esittämisestä primin algoritmilla."""
+
     def __init__(self, root, aloitus_kasittely, avaa_uudelleen_prim, koko):
         self._root = root
         self._frame = None
@@ -21,6 +23,13 @@ class PrimIkkuna:
         self._frame.destroy()
 
     def nayta_miten_luotu(self, canvas, lapikaynti, nopeus):
+        """Näyttää, miten labyrintti luotiin.
+        Args:
+            canvas: Tkinterin canvas, jolle labyrintti piirretään.
+            lapikaynti: Lista, joka koostuu soluista ja suunnista, joista solujen välinen seinä poistetaan.
+            nopeus: Luku, joka kertoo kuinka nopeasti labyrintin luomista käydään läpi.
+        """
+
         for i in range(self.koko+1):
             canvas.create_line(i*20+5, 5, i*20+5, 20*self.koko+5)
         for j in range(self.koko+1):
@@ -48,72 +57,26 @@ class PrimIkkuna:
                         height=self.koko*20+10, bg="white")
         canvas.pack()
 
-        ruudukko = Ruudukko(self.koko)
-
         for i in range(self.koko+1):
             canvas.create_line(i*20+5, 5, i*20+5, 20*self.koko+5)
         for j in range(self.koko+1):
             canvas.create_line(5, j*20+5, 20*self.koko+5, j*20+5)
 
-        solu = ruudukko.ruudut[randrange(self.koko)][randrange(self.koko)]
-        solu.oltujo = True
-        seinalista = [solu.vas, solu.oik, solu.yl, solu.al]
-        lapikaynti = []
+        lapikaynti = Prim(self.koko).luo_labyrintti()
 
-        while len(seinalista) > 0:
-            valittuseina = choice(seinalista)
-            vastakkainenseina = ruudukko.vastakkainen_seina(valittuseina)
-
-            if vastakkainenseina.y > -1 and vastakkainenseina.y < ruudukko.koko and vastakkainenseina.x > -1 and vastakkainenseina.x < ruudukko.koko:
-                valittusolu = ruudukko.ruudut[ruudukko.vastakkainen_seina(
-                    valittuseina).y][ruudukko.vastakkainen_seina(valittuseina).x]
-
-                if valittusolu.oltujo is not solu.oltujo:
-                    if valittuseina.suunta == "ylä":
-                        seinalista.append(valittusolu.vas)
-                        seinalista.append(valittusolu.oik)
-                        seinalista.append(valittusolu.yl)
-                        valittusolu.oltujo = True
-
-                        lapikaynti.append([valittusolu, valittuseina.suunta])
-
-                        canvas.create_line(valittusolu.x*20+6, valittuseina.y*20+5,
-                                           valittusolu.x*20+25, valittuseina.y*20+5, fill="white")
-
-                    elif valittuseina.suunta == "ala":
-                        seinalista.append(valittusolu.vas)
-                        seinalista.append(valittusolu.oik)
-                        seinalista.append(valittusolu.al)
-                        valittusolu.oltujo = True
-
-                        lapikaynti.append([valittusolu, valittuseina.suunta])
-
-                        canvas.create_line(valittusolu.x*20+6, valittusolu.y*20+5,
-                                           valittusolu.x*20+25, valittusolu.y*20+5, fill="white")
-
-                    elif valittuseina.suunta == "vasen":
-                        seinalista.append(valittusolu.vas)
-                        seinalista.append(valittusolu.al)
-                        seinalista.append(valittusolu.yl)
-                        valittusolu.oltujo = True
-
-                        lapikaynti.append([valittusolu, valittuseina.suunta])
-
-                        canvas.create_line(valittuseina.x*20+5, valittusolu.y*20+6,
-                                           valittuseina.x*20+5, valittusolu.y*20+25, fill="white")
-
-                    elif valittuseina.suunta == "oikea":
-                        seinalista.append(valittusolu.al)
-                        seinalista.append(valittusolu.oik)
-                        seinalista.append(valittusolu.yl)
-                        valittusolu.oltujo = True
-
-                        lapikaynti.append([valittusolu, valittuseina.suunta])
-
-                        canvas.create_line(valittusolu.x*20+5, valittusolu.y*20+6,
-                                           valittusolu.x*20+5, valittusolu.y*20+25, fill="white")
-
-            seinalista.remove(valittuseina)
+        for k in lapikaynti:
+            if k[1] == "ala":
+                canvas.create_line(k[0].x*20+6, k[0].y*20+5,
+                                   k[0].x*20+25, k[0].y*20+5, fill="white")
+            if k[1] == "ylä":
+                canvas.create_line(k[0].x*20+6, (k[0].y+1)*20+5,
+                                   k[0].x*20+25, (k[0].y+1)*20+5, fill="white")
+            if k[1] == "vasen":
+                canvas.create_line((k[0].x+1)*20+5, k[0].y*20+6,
+                                   (k[0].x+1)*20+5, k[0].y*20+25, fill="white")
+            if k[1] == "oikea":
+                canvas.create_line(k[0].x*20+5, k[0].y*20+6,
+                                   k[0].x*20+5, k[0].y*20+25, fill="white")
 
         nopeus = tkinter.StringVar(self._frame)
         nopeus.set("0.07")

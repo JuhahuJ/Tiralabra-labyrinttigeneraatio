@@ -2,10 +2,12 @@ from random import randrange, choice
 from tkinter import ttk, Canvas
 import tkinter
 from time import sleep
-from ruudukko import Ruudukko
+from labyrintit.syvyyshaku import Syvyyshaku
 
 
 class SyvyyshakuIkkuna:
+    """Luokka, joka vastaa labyrintin luomisesta ja esittämisestä syvyyshakualgoritmilla."""
+    
     def __init__(self, root, aloitus_kasittely, avaa_uudelleen_syvyys, koko):
         self._root = root
         self._frame = None
@@ -62,45 +64,30 @@ class SyvyyshakuIkkuna:
                         height=self.koko*20+10, bg="white")
         canvas.pack()
 
-        ruudukko = Ruudukko(self.koko)
-
         for i in range(self.koko+1):
             canvas.create_line(i*20+5, 5, i*20+5, 20*self.koko+5)
         for j in range(self.koko+1):
             canvas.create_line(5, j*20+5, 20*self.koko+5, j*20+5)
 
-        lapikaynti = []
+        lapikaynti = Syvyyshaku(self.koko).luo_labyrintti()
 
-        aloitusruutu = ruudukko.ruudut[randrange(
-            self.koko)][randrange(self.koko)]
-        aloitusruutu.oltujo = True
-        solulista = [aloitusruutu]
+        for solu in range(len(lapikaynti)):
+            if solu != len(lapikaynti)-1:
+                if lapikaynti[solu+1].x > lapikaynti[solu].x:
+                    canvas.create_line(lapikaynti[solu+1].x*20+5, lapikaynti[solu].y*20+6,
+                                       lapikaynti[solu+1].x*20+5, lapikaynti[solu+1].y*20+25, fill="white")
 
-        while len(solulista) > 0:
-            nykyinensolu = solulista[-1]
-            viereiset = ruudukko.viereiset_solut(
-                nykyinensolu.y, nykyinensolu.x)
-            lapikaynti.append(nykyinensolu)
-            solulista.pop()
+                if lapikaynti[solu+1].x < lapikaynti[solu].x:
+                    canvas.create_line(lapikaynti[solu].x*20+5, lapikaynti[solu].y*20+6,
+                                       lapikaynti[solu].x*20+5, lapikaynti[solu+1].y*20+25, fill="white")
 
-            if len(viereiset) > 0:
-                solulista.append(nykyinensolu)
-                seuraavasolu = choice(viereiset)
-                seuraavasolu.oltujo = True
-                solulista.append(seuraavasolu)
+                if lapikaynti[solu+1].y > lapikaynti[solu].y:
+                    canvas.create_line(lapikaynti[solu].x*20+6, lapikaynti[solu+1].y*20+5,
+                                       lapikaynti[solu+1].x*20+25, lapikaynti[solu+1].y*20+5, fill="white")
 
-                if seuraavasolu.x > nykyinensolu.x:
-                    canvas.create_line(seuraavasolu.x*20+5, nykyinensolu.y*20+6,
-                                       seuraavasolu.x*20+5, seuraavasolu.y*20+25, fill="white")
-                elif seuraavasolu.x < nykyinensolu.x:
-                    canvas.create_line(nykyinensolu.x*20+5, nykyinensolu.y*20+6,
-                                       nykyinensolu.x*20+5, seuraavasolu.y*20+25, fill="white")
-                elif seuraavasolu.y > nykyinensolu.y:
-                    canvas.create_line(nykyinensolu.x*20+6, seuraavasolu.y*20+5,
-                                       seuraavasolu.x*20+25, seuraavasolu.y*20+5, fill="white")
-                elif seuraavasolu.y < nykyinensolu.y:
-                    canvas.create_line(nykyinensolu.x*20+6, nykyinensolu.y*20+5,
-                                       seuraavasolu.x*20+25, nykyinensolu.y*20+5, fill="white")
+                if lapikaynti[solu+1].y < lapikaynti[solu].y:
+                    canvas.create_line(lapikaynti[solu].x*20+6, lapikaynti[solu].y*20+5,
+                                       lapikaynti[solu+1].x*20+25, lapikaynti[solu].y*20+5, fill="white")
 
         nopeus = tkinter.StringVar(self._frame)
         nopeus.set("0.07")

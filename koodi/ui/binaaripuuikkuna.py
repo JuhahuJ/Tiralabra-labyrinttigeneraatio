@@ -2,10 +2,12 @@ from random import choice
 from tkinter import ttk, Canvas
 import tkinter
 from time import sleep
-from ruudukko import Ruudukko
+from labyrintit.binaaripuu import Binaaripuu
 
 
 class BinaaripuuIkkuna:
+    """Luokka, joka vastaa labyrintin luomisesta ja esittämisestä binääripuualgoritmilla."""
+
     def __init__(self, root, aloitus_kasittely, avaa_uudelleen_binaaripuu, koko):
         self._root = root
         self._frame = None
@@ -21,6 +23,12 @@ class BinaaripuuIkkuna:
         self._frame.destroy()
 
     def nayta_miten_luotu(self, canvas, lapikaynti, nopeus):
+        """Näyttää, miten labyrintti luotiin.
+        Args:
+            canvas: Tkinterin canvas, jolle labyrintti piirretään.
+            lapikaynti: Lista, joka koostuu soluista ja suunnista, joista solujen välinen seinä poistetaan.
+            nopeus: Luku, joka kertoo kuinka nopeasti labyrintin luomista käydään läpi.
+        """
 
         for i in range(self.koko+1):
             canvas.create_line(i*20+5, 5, i*20+5, 20*self.koko+5)
@@ -49,37 +57,37 @@ class BinaaripuuIkkuna:
                 solu[0].x*20+10, solu[0].y*20+10, solu[0].x*20+20, solu[0].y*20+20, fill="white", outline="")
 
     def _initialize(self):
+        """Luo labyrintin ja napit.
+
+        Aluksi luo ruudukko olion ja piirtää aloitusikkunassa annetun koon perusteella ruudukon.
+        Sitten käy ruudukon läpi solu kerrallaan valiten joka solulle poistetaanko seinä sen alapuolelta vai oikealta.
+        """
+
         self._frame = ttk.Frame(master=self._root)
         canvas = Canvas(self._frame, width=self.koko*20+10,
                         height=self.koko*20+10, bg="white")
         canvas.pack()
-
-        ruudukko = Ruudukko(self.koko)
 
         for i in range(self.koko+1):
             canvas.create_line(i*20+5, 5, i*20+5, 20*self.koko+5)
         for j in range(self.koko+1):
             canvas.create_line(5, j*20+5, 20*self.koko+5, j*20+5)
 
-        lapikaynti = []
+        lapikaynti = Binaaripuu(self.koko).luo_labyrintti()
 
-        for i in range(len(ruudukko.ruudut)):
-            for solu in ruudukko.ruudut[i]:
-                suunta = choice(["alas", "oikealle"])
-                lapikaynti.append([solu, suunta])
-
-                if suunta == "alas" and solu.y < self.koko-1:
-                    canvas.create_line(solu.x*20+6, solu.y*20+25,
-                                       solu.x*20+25, solu.y*20+25, fill="white")
-                elif suunta == "alas" and solu.x < self.koko-1:
-                    canvas.create_line(solu.x*20+25, solu.y*20+6,
-                                       solu.x*20+25, solu.y*20+25, fill="white")
-                elif suunta == "oikealle" and solu.x < self.koko-1:
-                    canvas.create_line(solu.x*20+25, solu.y*20+6,
-                                       solu.x*20+25, solu.y*20+25, fill="white")
-                elif suunta == "oikealle" and solu.y < self.koko-1:
-                    canvas.create_line(solu.x*20+6, solu.y*20+25,
-                                       solu.x*20+25, solu.y*20+25, fill="white")
+        for solu in lapikaynti:
+            if solu[1] == "alas" and solu[0].y < self.koko-1:
+                canvas.create_line(solu[0].x*20+6, solu[0].y*20+25,
+                                   solu[0].x*20+25, solu[0].y*20+25, fill="white")
+            elif solu[1] == "alas" and solu[0].x < self.koko-1:
+                canvas.create_line(solu[0].x*20+25, solu[0].y*20+6,
+                                   solu[0].x*20+25, solu[0].y*20+25, fill="white")
+            elif solu[1] == "oikealle" and solu[0].x < self.koko-1:
+                canvas.create_line(solu[0].x*20+25, solu[0].y*20+6,
+                                   solu[0].x*20+25, solu[0].y*20+25, fill="white")
+            elif solu[1] == "oikealle" and solu[0].y < self.koko-1:
+                canvas.create_line(solu[0].x*20+6, solu[0].y*20+25,
+                                   solu[0].x*20+25, solu[0].y*20+25, fill="white")
 
         nopeus = tkinter.StringVar(self._frame)
         nopeus.set("0.07")
