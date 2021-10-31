@@ -5,7 +5,7 @@ from labyrintit.syvyyshaku import Syvyyshaku
 
 
 class SyvyyshakuIkkuna:
-    """Luokka, joka vastaa labyrintin luomisesta ja esittämisestä syvyyshakualgoritmilla."""
+    """Luokka, joka vastaa ikkunasta, johon piirretään labyrintti satunnaisen syvyyshakualgoritmin avulla avulla."""
 
     def __init__(self, root, aloitus_kasittely, avaa_uudelleen_syvyys, koko):
         self._root = root
@@ -22,6 +22,14 @@ class SyvyyshakuIkkuna:
         self._frame.destroy()
 
     def nayta_miten_luotu(self, canvas, lapikaynti, nopeus):
+        """Näyttää, miten labyrintti luotiin.
+
+        Args:
+            canvas: Tkinterin canvas, jolle labyrintti piirretään.
+            lapikaynti: Lista, joka koostuu peräkkäisistä soluista, joiden perusteella solujen väliset seinät poistetaan.
+            nopeus: Luku, joka kertoo kuinka nopeasti labyrintin luomista käydään läpi.
+        """
+
         for i in range(self.koko+1):
             canvas.create_line(i*20+5, 5, i*20+5, 20*self.koko+5)
         for j in range(self.koko+1):
@@ -58,6 +66,12 @@ class SyvyyshakuIkkuna:
                 sleep(nopeus)
 
     def _initialize(self):
+        """Luo napit ja piirtää labyrintin.
+
+        Piirtää ensin ruudukon annetun koon perusteella.
+        Sitten piirtää labyrintin syvyyshaku luokasta haettujen ohjeiden perusteella.
+        """
+
         self._frame = ttk.Frame(master=self._root)
         canvas = Canvas(self._frame, width=self.koko*20+10,
                         height=self.koko*20+10, bg="white")

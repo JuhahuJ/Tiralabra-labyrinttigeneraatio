@@ -3,6 +3,7 @@ import tkinter
 
 
 class AloitusIkkuna:
+    """Luokka, joka sovelluksen aloitusikkunasta."""
     def __init__(self, root, syvyyshaku_kasittely, prim_kasittely, binaaripuu_kasittely):
         self._root = root
         self._frame = None
@@ -49,8 +50,8 @@ class AloitusIkkuna:
         labyrintin_koko_teksti = ttk.Label(master=self._frame,
                                            text="Luodun labyrintin koko x*x :")
 
+        labyrintin_koko_teksti.grid(row=0, column=0)
+        koko_valinta.grid(row=0, column=1)
         syvyyshaku_luonti_nappula.grid(row=1, column=0)
         prim_luonti_nappula.grid(row=2, column=0)
         binaaripuu_luonti_nappula.grid(row=3, column=0)
-        labyrintin_koko_teksti.grid(row=4, column=0)
-        koko_valinta.grid(row=4, column=1)

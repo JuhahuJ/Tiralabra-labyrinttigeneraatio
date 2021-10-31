@@ -5,7 +5,7 @@ from labyrintit.prim import Prim
 
 
 class PrimIkkuna:
-    """Luokka, joka vastaa labyrintin luomisesta ja esittämisestä primin algoritmilla."""
+    """Luokka, joka vastaa ikkunasta, johon piirretään labyrintti primin algoritmin avulla"""
 
     def __init__(self, root, aloitus_kasittely, avaa_uudelleen_prim, koko):
         self._root = root
@@ -23,6 +23,7 @@ class PrimIkkuna:
 
     def nayta_miten_luotu(self, canvas, lapikaynti, nopeus):
         """Näyttää, miten labyrintti luotiin.
+
         Args:
             canvas: Tkinterin canvas, jolle labyrintti piirretään.
             lapikaynti: Lista, joka koostuu soluista ja suunnista, joista solujen välinen seinä poistetaan.
@@ -51,6 +52,12 @@ class PrimIkkuna:
             sleep(nopeus)
 
     def _initialize(self):
+        """Luo napit ja piirtää labyrintin.
+
+        Piirtää ensin ruudukon annetun koon perusteella.
+        Sitten piirtää labyrintin prim luokasta haettujen ohjeiden perusteella.
+        """
+
         self._frame = ttk.Frame(master=self._root)
         canvas = Canvas(self._frame, width=self.koko*20+10,
                         height=self.koko*20+10, bg="white")

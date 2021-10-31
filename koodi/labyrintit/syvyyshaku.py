@@ -3,10 +3,16 @@ from ruudukko import Ruudukko
 
 
 class Syvyyshaku:
+    """Luokka, jonka avulla luodaan labyrintti käyttäen satunnaista syvyyshakua."""
+
     def __init__(self, koko):
         self.koko = koko
 
     def luo_labyrintti(self):
+        """Luo labyrintin käyttäen satunnaista syvyyshakua.
+
+        Returns: Palauttaa listan, joka sisältää peräkkäisiä soluja, joiden perusteella labyrintti piirretään.
+        """
         ruudukko = Ruudukko(self.koko)
         lapikaynti = []
         aloitusruutu = ruudukko.ruudut[randrange(
@@ -16,8 +22,7 @@ class Syvyyshaku:
 
         while len(solulista) > 0:
             nykyinensolu = solulista[-1]
-            viereiset = ruudukko.viereiset_solut(
-                nykyinensolu.y, nykyinensolu.x)
+            viereiset = ruudukko.viereiset_solut(nykyinensolu)
             lapikaynti.append(nykyinensolu)
             solulista.pop()
 

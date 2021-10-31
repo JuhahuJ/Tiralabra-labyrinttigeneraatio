@@ -5,7 +5,7 @@ from labyrintit.binaaripuu import Binaaripuu
 
 
 class BinaaripuuIkkuna:
-    """Luokka, joka vastaa labyrintin luomisesta ja esittämisestä binääripuualgoritmilla."""
+    """Luokka, joka vastaa ikkunasta, johon piirretään labyrintti binääripuualgoritmilla"""
 
     def __init__(self, root, aloitus_kasittely, avaa_uudelleen_binaaripuu, koko):
         self._root = root
@@ -23,6 +23,7 @@ class BinaaripuuIkkuna:
 
     def nayta_miten_luotu(self, canvas, lapikaynti, nopeus):
         """Näyttää, miten labyrintti luotiin.
+        
         Args:
             canvas: Tkinterin canvas, jolle labyrintti piirretään.
             lapikaynti: Lista, joka koostuu soluista ja suunnista, joista solujen välinen seinä poistetaan.
@@ -56,10 +57,10 @@ class BinaaripuuIkkuna:
                 solu[0].x*20+10, solu[0].y*20+10, solu[0].x*20+20, solu[0].y*20+20, fill="white", outline="")
 
     def _initialize(self):
-        """Luo labyrintin ja napit.
+        """Luo napit ja piirtää labyrintin.
 
-        Aluksi luo ruudukko olion ja piirtää aloitusikkunassa annetun koon perusteella ruudukon.
-        Sitten käy ruudukon läpi solu kerrallaan valiten joka solulle poistetaanko seinä sen alapuolelta vai oikealta.
+        Piirtää ensin ruudukon annetun koon perusteella.
+        Sitten piirtää labyrintin binääripuu luokasta haettujen ohjeiden perusteella.
         """
 
         self._frame = ttk.Frame(master=self._root)

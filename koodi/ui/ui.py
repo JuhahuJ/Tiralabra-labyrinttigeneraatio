@@ -5,6 +5,7 @@ from ui.binaaripuuikkuna import BinaaripuuIkkuna
 
 
 class UI:
+    """Luokka, joka käsittelee sovelluksen käyttöliittymää."""
     def __init__(self, root):
         self._root = root
         self._nykyinen_ikkuna = None

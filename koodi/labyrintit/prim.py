@@ -3,10 +3,16 @@ from ruudukko import Ruudukko
 
 
 class Prim:
+    """Luokka, jonka avulla luodaan labyrintti käyttäen primin algoritmia."""
+
     def __init__(self, koko):
         self.koko = koko
 
     def luo_labyrintti(self):
+        """Luo labyrintin käyttäen primin algoritmia.
+
+        Returns: Palauttaa listan, joka sisältää solu, suunta pareja, joiden perusteella labyrintti piirretään.
+        """
         ruudukko = Ruudukko(self.koko)
         solu = ruudukko.ruudut[randrange(self.koko)][randrange(self.koko)]
         solu.oltujo = True
