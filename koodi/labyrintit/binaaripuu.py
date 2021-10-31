@@ -1,5 +1,6 @@
-from random import randrange, choice
+from random import choice
 from ruudukko import Ruudukko
+
 
 class Binaaripuu:
     def __init__(self, koko):
@@ -8,7 +9,7 @@ class Binaaripuu:
     def luo_labyrintti(self):
         ruudukko = Ruudukko(self.koko)
         lapikaynti = []
-        
+
         for i in range(len(ruudukko.ruudut)):
             for solu in ruudukko.ruudut[i]:
                 suunta = choice(["alas", "oikealle"])

@@ -1,4 +1,3 @@
-from random import choice
 from tkinter import ttk, Canvas
 import tkinter
 from time import sleep

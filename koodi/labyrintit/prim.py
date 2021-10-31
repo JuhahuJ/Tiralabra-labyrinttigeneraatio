@@ -1,6 +1,7 @@
 from random import randrange, choice
 from ruudukko import Ruudukko
 
+
 class Prim:
     def __init__(self, koko):
         self.koko = koko

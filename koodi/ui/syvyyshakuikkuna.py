@@ -1,4 +1,3 @@
-from random import randrange, choice
 from tkinter import ttk, Canvas
 import tkinter
 from time import sleep
@@ -7,7 +6,7 @@ from labyrintit.syvyyshaku import Syvyyshaku
 
 class SyvyyshakuIkkuna:
     """Luokka, joka vastaa labyrintin luomisesta ja esittämisestä syvyyshakualgoritmilla."""
-    
+
     def __init__(self, root, aloitus_kasittely, avaa_uudelleen_syvyys, koko):
         self._root = root
         self._frame = None

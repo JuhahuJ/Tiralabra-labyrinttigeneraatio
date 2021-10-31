@@ -1,4 +1,3 @@
-from random import choice, randrange
 from tkinter import ttk, Canvas
 import tkinter
 from time import sleep
@@ -99,7 +98,7 @@ class PrimIkkuna:
             command=lambda: self.nayta_miten_luotu(
                 canvas, lapikaynti, float(nopeus.get())))
 
-        nopeus_valinta = tkinter.OptionMenu(self._frame, nopeus, *val_lista) 
+        nopeus_valinta = tkinter.OptionMenu(self._frame, nopeus, *val_lista)
         takaisin_alkuuna_nappi.pack()
         luo_uusi_labyrintti_nappi.pack()
         nayta_labyrintin_luominen_nappi.pack(side="left")
