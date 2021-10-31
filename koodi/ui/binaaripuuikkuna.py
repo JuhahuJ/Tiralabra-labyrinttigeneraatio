@@ -21,7 +21,7 @@ class BinaaripuuIkkuna:
     def destroy(self):
         self._frame.destroy()
 
-    def nayta_miten_luotu(self, canvas, lapikaynti):
+    def nayta_miten_luotu(self, canvas, lapikaynti, nopeus):
         paikka = 0
 
         for i in range(self.koko+1):
@@ -46,7 +46,7 @@ class BinaaripuuIkkuna:
                                         solu[0].x*20+25, solu[0].y*20+25, fill="white")
             canvas.create_rectangle(solu[0].x*20+12, solu[0].y*20+12, solu[0].x*20+18, solu[0].y*20+18,fill="blue")
             self._root.update()
-            sleep(0.1)
+            sleep(nopeus)
             canvas.create_rectangle(solu[0].x*20+10, solu[0].y*20+10, solu[0].x*20+20, solu[0].y*20+20,fill="white", outline="")
 
     def _initialize(self):
@@ -86,6 +86,11 @@ class BinaaripuuIkkuna:
                     canvas.create_line(solu.x*20+6, solu.y*20+25,
                                            solu.x*20+25, solu.y*20+25, fill="white")
 
+        nopeus = tkinter.StringVar(self._frame)
+        nopeus.set("0.07")
+
+        val_lista = [0.01, 0.07, 0.15, 0.5, 1]
+
         
 
         button = ttk.Button(
@@ -100,6 +105,8 @@ class BinaaripuuIkkuna:
         ).pack()
         button3 = ttk.Button(
             master=self._frame,
-            text="Näytä labyrintin luominen",
-            command=lambda: self.nayta_miten_luotu(canvas, lapikaynti)
-        ).pack()
+            text="Näytä labyrintin luominen nopeudella",
+            command=lambda: self.nayta_miten_luotu(canvas, lapikaynti, float(nopeus.get()))
+        ).pack(side="left")
+        nopeus_valinta = tkinter.OptionMenu(
+            self._frame, nopeus, *val_lista).pack(side="right")

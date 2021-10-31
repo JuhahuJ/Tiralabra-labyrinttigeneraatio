@@ -20,7 +20,7 @@ class PrimIkkuna:
     def destroy(self):
         self._frame.destroy()
 
-    def nayta_miten_luotu(self, canvas, lapikaynti):
+    def nayta_miten_luotu(self, canvas, lapikaynti, nopeus):
         paikka = 0
         for i in range(self.koko+1):
             canvas.create_line(paikka*20+5, 5, paikka*20+5, 20*self.koko+5)
@@ -44,7 +44,7 @@ class PrimIkkuna:
                 canvas.create_line(k[0].x*20+5, k[0].y*20+6,
                                     k[0].x*20+5, k[0].y*20+25, fill="white")        
             self._root.update()
-            sleep(0.1)
+            sleep(nopeus)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -116,6 +116,11 @@ class PrimIkkuna:
                     solu = valittusolu
             apulista.remove(valittuseina)
 
+        nopeus = tkinter.StringVar(self._frame)
+        nopeus.set("0.07")
+
+        val_lista = [0.01, 0.07, 0.15, 0.5, 1]
+
         button = ttk.Button(
             master=self._frame,
             text="Mene takaisin alkuun",
@@ -128,6 +133,8 @@ class PrimIkkuna:
         ).pack()
         button3 = ttk.Button(
             master=self._frame,
-            text="Näytä labyrintin luominen",
-            command=lambda: self.nayta_miten_luotu(canvas, lapikaynti)
-        ).pack()
+            text="Näytä labyrintin luominen nopeudella",
+            command=lambda: self.nayta_miten_luotu(canvas, lapikaynti, float(nopeus.get()))
+        ).pack(side="left")
+        nopeus_valinta = tkinter.OptionMenu(
+            self._frame, nopeus, *val_lista).pack(side="right")
