@@ -30,23 +30,26 @@ class SyvyyshakuIkkuna:
         for j in range(self.koko+1):
             canvas.create_line(5, paikka*20+5, 20*self.koko+5, paikka*20+5)
             paikka += 1
-        canvas.create_rectangle(lapikaynti[0].x*20+7, lapikaynti[0].y*20+7, lapikaynti[0].x*20+23, lapikaynti[0].y*20+23,fill="green")
+        canvas.create_rectangle(lapikaynti[0].x*20+7, lapikaynti[0].y*20+7,
+                                lapikaynti[0].x*20+23, lapikaynti[0].y*20+23, fill="green")
         for solu in range(len(lapikaynti)):
             if solu != len(lapikaynti)-1:
                 if lapikaynti[solu+1].x > lapikaynti[solu].x:
                     canvas.create_line(lapikaynti[solu+1].x*20+5, lapikaynti[solu].y*20+6,
-                                        lapikaynti[solu+1].x*20+5, lapikaynti[solu+1].y*20+25, fill="white")
+                                       lapikaynti[solu+1].x*20+5, lapikaynti[solu+1].y*20+25, fill="white")
                 if lapikaynti[solu+1].x < lapikaynti[solu].x:
                     canvas.create_line(lapikaynti[solu].x*20+5, lapikaynti[solu].y*20+6,
-                                        lapikaynti[solu].x*20+5, lapikaynti[solu+1].y*20+25, fill="white")
+                                       lapikaynti[solu].x*20+5, lapikaynti[solu+1].y*20+25, fill="white")
                 if lapikaynti[solu+1].y > lapikaynti[solu].y:
                     canvas.create_line(lapikaynti[solu].x*20+6, lapikaynti[solu+1].y*20+5,
-                                        lapikaynti[solu+1].x*20+25, lapikaynti[solu+1].y*20+5, fill="white")
+                                       lapikaynti[solu+1].x*20+25, lapikaynti[solu+1].y*20+5, fill="white")
                 if lapikaynti[solu+1].y < lapikaynti[solu].y:
                     canvas.create_line(lapikaynti[solu].x*20+6, lapikaynti[solu].y*20+5,
-                                        lapikaynti[solu+1].x*20+25, lapikaynti[solu].y*20+5, fill="white")
-                canvas.create_rectangle(lapikaynti[solu+1].x*20+12, lapikaynti[solu+1].y*20+12, lapikaynti[solu+1].x*20+18, lapikaynti[solu+1].y*20+18,fill="blue", outline="")
-                canvas.create_rectangle(lapikaynti[solu].x*20+10, lapikaynti[solu].y*20+10, lapikaynti[solu].x*20+20, lapikaynti[solu].y*20+20,fill="white", outline="")
+                                       lapikaynti[solu+1].x*20+25, lapikaynti[solu].y*20+5, fill="white")
+                canvas.create_rectangle(lapikaynti[solu+1].x*20+12, lapikaynti[solu+1].y*20+12,
+                                        lapikaynti[solu+1].x*20+18, lapikaynti[solu+1].y*20+18, fill="blue", outline="")
+                canvas.create_rectangle(lapikaynti[solu].x*20+10, lapikaynti[solu].y*20+10,
+                                        lapikaynti[solu].x*20+20, lapikaynti[solu].y*20+20, fill="white", outline="")
                 self._root.update()
                 sleep(nopeus)
 
@@ -135,7 +138,8 @@ class SyvyyshakuIkkuna:
         button3 = ttk.Button(
             master=self._frame,
             text="Näytä labyrintin luominen nopeudella",
-            command=lambda: self.nayta_miten_luotu(canvas, lapikaynti, float(nopeus.get()))
+            command=lambda: self.nayta_miten_luotu(
+                canvas, lapikaynti, float(nopeus.get()))
         ).pack(side="left")
         nopeus_valinta = tkinter.OptionMenu(
             self._frame, nopeus, *val_lista).pack(side="right")

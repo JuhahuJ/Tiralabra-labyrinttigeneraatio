@@ -33,16 +33,16 @@ class PrimIkkuna:
         for k in lapikaynti:
             if k[1] == "ala":
                 canvas.create_line(k[0].x*20+6, k[0].y*20+5,
-                                    k[0].x*20+25, k[0].y*20+5, fill="white")
+                                   k[0].x*20+25, k[0].y*20+5, fill="white")
             if k[1] == "ylä":
                 canvas.create_line(k[0].x*20+6, (k[0].y+1)*20+5,
-                                    k[0].x*20+25, (k[0].y+1)*20+5, fill="white")
+                                   k[0].x*20+25, (k[0].y+1)*20+5, fill="white")
             if k[1] == "vasen":
                 canvas.create_line((k[0].x+1)*20+5, k[0].y*20+6,
-                                    (k[0].x+1)*20+5, k[0].y*20+25, fill="white")
+                                   (k[0].x+1)*20+5, k[0].y*20+25, fill="white")
             if k[1] == "oikea":
                 canvas.create_line(k[0].x*20+5, k[0].y*20+6,
-                                    k[0].x*20+5, k[0].y*20+25, fill="white")        
+                                   k[0].x*20+5, k[0].y*20+25, fill="white")
             self._root.update()
             sleep(nopeus)
 
@@ -86,7 +86,7 @@ class PrimIkkuna:
                         apulista.append(valittusolu.oik)
                         apulista.append(valittusolu.yl)
                         valittusolu.oltujo = True
-                        lapikaynti.append([valittusolu,valittuseina.suunta])
+                        lapikaynti.append([valittusolu, valittuseina.suunta])
                         canvas.create_line(valittusolu.x*20+6, valittuseina.y*20+5,
                                            valittusolu.x*20+25, valittuseina.y*20+5, fill="white")
                     elif valittuseina.suunta == "ala":
@@ -94,7 +94,7 @@ class PrimIkkuna:
                         apulista.append(valittusolu.oik)
                         apulista.append(valittusolu.al)
                         valittusolu.oltujo = True
-                        lapikaynti.append([valittusolu,valittuseina.suunta])
+                        lapikaynti.append([valittusolu, valittuseina.suunta])
                         canvas.create_line(valittusolu.x*20+6, valittusolu.y*20+5,
                                            valittusolu.x*20+25, valittusolu.y*20+5, fill="white")
                     elif valittuseina.suunta == "vasen":
@@ -102,7 +102,7 @@ class PrimIkkuna:
                         apulista.append(valittusolu.al)
                         apulista.append(valittusolu.yl)
                         valittusolu.oltujo = True
-                        lapikaynti.append([valittusolu,valittuseina.suunta])
+                        lapikaynti.append([valittusolu, valittuseina.suunta])
                         canvas.create_line(valittuseina.x*20+5, valittusolu.y*20+6,
                                            valittuseina.x*20+5, valittusolu.y*20+25, fill="white")
                     elif valittuseina.suunta == "oikea":
@@ -110,7 +110,7 @@ class PrimIkkuna:
                         apulista.append(valittusolu.oik)
                         apulista.append(valittusolu.yl)
                         valittusolu.oltujo = True
-                        lapikaynti.append([valittusolu,valittuseina.suunta])
+                        lapikaynti.append([valittusolu, valittuseina.suunta])
                         canvas.create_line(valittusolu.x*20+5, valittusolu.y*20+6,
                                            valittusolu.x*20+5, valittusolu.y*20+25, fill="white")
                     solu = valittusolu
@@ -134,7 +134,8 @@ class PrimIkkuna:
         button3 = ttk.Button(
             master=self._frame,
             text="Näytä labyrintin luominen nopeudella",
-            command=lambda: self.nayta_miten_luotu(canvas, lapikaynti, float(nopeus.get()))
+            command=lambda: self.nayta_miten_luotu(
+                canvas, lapikaynti, float(nopeus.get()))
         ).pack(side="left")
         nopeus_valinta = tkinter.OptionMenu(
             self._frame, nopeus, *val_lista).pack(side="right")

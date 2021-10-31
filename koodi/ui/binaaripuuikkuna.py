@@ -5,7 +5,6 @@ import tkinter
 from time import sleep
 
 
-
 class BinaaripuuIkkuna:
     def __init__(self, root, aloitus_kasittely, avaa_uudelleen_binaaripuu, koko):
         self._root = root
@@ -34,20 +33,22 @@ class BinaaripuuIkkuna:
         for solu in lapikaynti:
             if solu[1] == "alas" and solu[0].y < self.koko-1:
                 canvas.create_line(solu[0].x*20+6, solu[0].y*20+25,
-                                        solu[0].x*20+25, solu[0].y*20+25, fill="white")
+                                   solu[0].x*20+25, solu[0].y*20+25, fill="white")
             elif solu[1] == "alas" and solu[0].x < self.koko-1:
                 canvas.create_line(solu[0].x*20+25, solu[0].y*20+6,
-                                        solu[0].x*20+25, solu[0].y*20+25, fill="white")
+                                   solu[0].x*20+25, solu[0].y*20+25, fill="white")
             elif solu[1] == "oikealle" and solu[0].x < self.koko-1:
                 canvas.create_line(solu[0].x*20+25, solu[0].y*20+6,
-                                        solu[0].x*20+25, solu[0].y*20+25, fill="white")
+                                   solu[0].x*20+25, solu[0].y*20+25, fill="white")
             elif solu[1] == "oikealle" and solu[0].y < self.koko-1:
                 canvas.create_line(solu[0].x*20+6, solu[0].y*20+25,
-                                        solu[0].x*20+25, solu[0].y*20+25, fill="white")
-            canvas.create_rectangle(solu[0].x*20+12, solu[0].y*20+12, solu[0].x*20+18, solu[0].y*20+18,fill="blue")
+                                   solu[0].x*20+25, solu[0].y*20+25, fill="white")
+            canvas.create_rectangle(
+                solu[0].x*20+12, solu[0].y*20+12, solu[0].x*20+18, solu[0].y*20+18, fill="blue")
             self._root.update()
             sleep(nopeus)
-            canvas.create_rectangle(solu[0].x*20+10, solu[0].y*20+10, solu[0].x*20+20, solu[0].y*20+20,fill="white", outline="")
+            canvas.create_rectangle(
+                solu[0].x*20+10, solu[0].y*20+10, solu[0].x*20+20, solu[0].y*20+20, fill="white", outline="")
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -71,27 +72,25 @@ class BinaaripuuIkkuna:
 
         for i in range(len(ruudukko.ruudut)):
             for solu in ruudukko.ruudut[i]:
-                suunta = choice(["alas","oikealle"])
-                lapikaynti.append([solu,suunta])
+                suunta = choice(["alas", "oikealle"])
+                lapikaynti.append([solu, suunta])
                 if suunta == "alas" and solu.y < self.koko-1:
                     canvas.create_line(solu.x*20+6, solu.y*20+25,
-                                           solu.x*20+25, solu.y*20+25, fill="white")
+                                       solu.x*20+25, solu.y*20+25, fill="white")
                 elif suunta == "alas" and solu.x < self.koko-1:
                     canvas.create_line(solu.x*20+25, solu.y*20+6,
-                                           solu.x*20+25, solu.y*20+25, fill="white")
+                                       solu.x*20+25, solu.y*20+25, fill="white")
                 elif suunta == "oikealle" and solu.x < self.koko-1:
                     canvas.create_line(solu.x*20+25, solu.y*20+6,
-                                           solu.x*20+25, solu.y*20+25, fill="white")
+                                       solu.x*20+25, solu.y*20+25, fill="white")
                 elif suunta == "oikealle" and solu.y < self.koko-1:
                     canvas.create_line(solu.x*20+6, solu.y*20+25,
-                                           solu.x*20+25, solu.y*20+25, fill="white")
+                                       solu.x*20+25, solu.y*20+25, fill="white")
 
         nopeus = tkinter.StringVar(self._frame)
         nopeus.set("0.07")
 
         val_lista = [0.01, 0.07, 0.15, 0.5, 1]
-
-        
 
         button = ttk.Button(
             master=self._frame,
@@ -106,7 +105,8 @@ class BinaaripuuIkkuna:
         button3 = ttk.Button(
             master=self._frame,
             text="Näytä labyrintin luominen nopeudella",
-            command=lambda: self.nayta_miten_luotu(canvas, lapikaynti, float(nopeus.get()))
+            command=lambda: self.nayta_miten_luotu(
+                canvas, lapikaynti, float(nopeus.get()))
         ).pack(side="left")
         nopeus_valinta = tkinter.OptionMenu(
             self._frame, nopeus, *val_lista).pack(side="right")

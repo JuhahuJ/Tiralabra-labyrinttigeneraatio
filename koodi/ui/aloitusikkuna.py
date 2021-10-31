@@ -1,4 +1,4 @@
-from tkinter import ttk, constants
+from tkinter import ttk
 import tkinter
 
 
@@ -25,7 +25,7 @@ class AloitusIkkuna:
         valittu_arvo = tkinter.StringVar(self._frame)
         valittu_arvo.set(3)
 
-        val_lista = [3, 4, 5, 6, 7, 8, 9, 15, 24, 33, 38]
+        val_lista = [3, 4, 5, 9, 15, 24, 33, 38]
 
         koko_valinta = tkinter.OptionMenu(
             self._frame, valittu_arvo, *val_lista)
@@ -48,8 +48,12 @@ class AloitusIkkuna:
             command=lambda: self._binaaripuu_kasittely(valittu_arvo.get())
         )
 
+        label = ttk.Label(master=self._frame,
+                          text="Luodun labyrintin koko x*x :")
+
         label.grid(row=0, column=0)
         button.grid(row=1, column=0)
         button2.grid(row=2, column=0)
         button3.grid(row=3, column=0)
-        koko_valinta.grid(row=1, column=1)
+        label.grid(row=4, column=0)
+        koko_valinta.grid(row=4, column=1)
