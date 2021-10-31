@@ -19,8 +19,6 @@ class AloitusIkkuna:
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
-        label = ttk.Label(master=self._frame,
-                          text="Tervetuloa labyrinttigeneraattoriin!")
 
         valittu_arvo = tkinter.StringVar(self._frame)
         valittu_arvo.set(3)
@@ -30,30 +28,29 @@ class AloitusIkkuna:
         koko_valinta = tkinter.OptionMenu(
             self._frame, valittu_arvo, *val_lista)
 
-        button = ttk.Button(
+        syvyyshaku_luonti_nappula = ttk.Button(
             master=self._frame,
             text="Luo labyrintti syvyyshaulla",
             command=lambda: self._syvyyshaku_kasittely(valittu_arvo.get())
         )
 
-        button2 = ttk.Button(
+        prim_luonti_nappula = ttk.Button(
             master=self._frame,
             text="Luo labyrintti primin algoritmilla",
             command=lambda: self._prim_kasittely(valittu_arvo.get())
         )
 
-        button3 = ttk.Button(
+        binaaripuu_luonti_nappula = ttk.Button(
             master=self._frame,
             text="Luo labyrintti binääripuu algoritmilla",
             command=lambda: self._binaaripuu_kasittely(valittu_arvo.get())
         )
 
-        label = ttk.Label(master=self._frame,
-                          text="Luodun labyrintin koko x*x :")
+        labyrintin_koko_teksti = ttk.Label(master=self._frame,
+                                           text="Luodun labyrintin koko x*x :")
 
-        label.grid(row=0, column=0)
-        button.grid(row=1, column=0)
-        button2.grid(row=2, column=0)
-        button3.grid(row=3, column=0)
-        label.grid(row=4, column=0)
+        syvyyshaku_luonti_nappula.grid(row=1, column=0)
+        prim_luonti_nappula.grid(row=2, column=0)
+        binaaripuu_luonti_nappula.grid(row=3, column=0)
+        labyrintin_koko_teksti.grid(row=4, column=0)
         koko_valinta.grid(row=4, column=1)

@@ -1,6 +1,3 @@
-from seina import Seina
-
-
 class Solu:
     '''Solu olio, joka saa arvot x, y ja oltujo'''
 
@@ -19,7 +16,9 @@ class Solu:
         self.yl = Seina("ylä", self.x, self.y)
         self.al = Seina("ala", self.x, self.y)
 
-    def koordinaatit(self):
-        '''Palauttaa solun koordinaatit'''
 
-        return [self.y, self.x]
+class Seina:
+    def __init__(self, suunta, x, y):
+        self.suunta = suunta
+        self.x = x
+        self.y = y

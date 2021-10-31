@@ -1,4 +1,3 @@
-from tkinter import Tk
 from ui.aloitusikkuna import AloitusIkkuna
 from ui.syvyyshakuikkuna import SyvyyshakuIkkuna
 from ui.primikkuna import PrimIkkuna

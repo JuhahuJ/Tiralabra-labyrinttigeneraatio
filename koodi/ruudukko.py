@@ -12,29 +12,49 @@ class Ruudukko:
 
     def luo(self):
         self.ruudut = []
+
         for i in range(self.koko):
             self.ruudut.append("väliaikainen arvo")
             apulista = []
+
             for j in range(self.koko):
                 solu = Solu(i, j)
                 solu.luo_seinat()
                 apulista.append(solu)
+
             self.ruudut[i] = apulista
 
+    def viereiset_solut(self, solu_y, solu_x):
+        viereiset = []
+
+        if solu_y > 0 and self.ruudut[solu_y-1][solu_x].oltujo is False:
+            viereiset.append(self.ruudut[solu_y-1][solu_x])
+
+        if solu_y < len(self.ruudut)-1 and self.ruudut[solu_y+1][solu_x].oltujo is False:
+            viereiset.append(self.ruudut[solu_y+1][solu_x])
+
+        if solu_x > 0 and self.ruudut[solu_y][solu_x-1].oltujo is False:
+            viereiset.append(self.ruudut[solu_y][solu_x-1])
+
+        if solu_x < len(self.ruudut)-1 and self.ruudut[solu_y][solu_x+1].oltujo is False:
+            viereiset.append(self.ruudut[solu_y][solu_x+1])
+
+        return viereiset
+
     def vastakkainen_seina(self, seina):
+        vastakkainen_seina = copy(seina)
         if seina.suunta == "ylä":
-            viereiset = copy(seina)
-            viereiset.y -= 1
-            return viereiset
+            vastakkainen_seina.y -= 1
+            return vastakkainen_seina
+
         if seina.suunta == "ala":
-            viereiset = copy(seina)
-            viereiset.y += 1
-            return viereiset
+            vastakkainen_seina.y += 1
+            return vastakkainen_seina
+
         if seina.suunta == "vasen":
-            viereiset = copy(seina)
-            viereiset.x -= 1
-            return viereiset
+            vastakkainen_seina.x -= 1
+            return vastakkainen_seina
+
         if seina.suunta == "oikea":
-            viereiset = copy(seina)
-            viereiset.x += 1
-            return viereiset
+            vastakkainen_seina.x += 1
+            return vastakkainen_seina

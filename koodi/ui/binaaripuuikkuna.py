@@ -1,8 +1,8 @@
-from ruudukko import Ruudukko
 from random import choice
 from tkinter import ttk, Canvas
 import tkinter
 from time import sleep
+from ruudukko import Ruudukko
 
 
 class BinaaripuuIkkuna:
@@ -21,15 +21,12 @@ class BinaaripuuIkkuna:
         self._frame.destroy()
 
     def nayta_miten_luotu(self, canvas, lapikaynti, nopeus):
-        paikka = 0
 
         for i in range(self.koko+1):
-            canvas.create_line(paikka*20+5, 5, paikka*20+5, 20*self.koko+5)
-            paikka += 1
-        paikka = 0
+            canvas.create_line(i*20+5, 5, i*20+5, 20*self.koko+5)
         for j in range(self.koko+1):
-            canvas.create_line(5, paikka*20+5, 20*self.koko+5, paikka*20+5)
-            paikka += 1
+            canvas.create_line(5, j*20+5, 20*self.koko+5, j*20+5)
+
         for solu in lapikaynti:
             if solu[1] == "alas" and solu[0].y < self.koko-1:
                 canvas.create_line(solu[0].x*20+6, solu[0].y*20+25,
@@ -43,6 +40,7 @@ class BinaaripuuIkkuna:
             elif solu[1] == "oikealle" and solu[0].y < self.koko-1:
                 canvas.create_line(solu[0].x*20+6, solu[0].y*20+25,
                                    solu[0].x*20+25, solu[0].y*20+25, fill="white")
+
             canvas.create_rectangle(
                 solu[0].x*20+12, solu[0].y*20+12, solu[0].x*20+18, solu[0].y*20+18, fill="blue")
             self._root.update()
@@ -58,15 +56,10 @@ class BinaaripuuIkkuna:
 
         ruudukko = Ruudukko(self.koko)
 
-        paikka = 0
-
         for i in range(self.koko+1):
-            canvas.create_line(paikka*20+5, 5, paikka*20+5, 20*self.koko+5)
-            paikka += 1
-        paikka = 0
+            canvas.create_line(i*20+5, 5, i*20+5, 20*self.koko+5)
         for j in range(self.koko+1):
-            canvas.create_line(5, paikka*20+5, 20*self.koko+5, paikka*20+5)
-            paikka += 1
+            canvas.create_line(5, j*20+5, 20*self.koko+5, j*20+5)
 
         lapikaynti = []
 
@@ -74,6 +67,7 @@ class BinaaripuuIkkuna:
             for solu in ruudukko.ruudut[i]:
                 suunta = choice(["alas", "oikealle"])
                 lapikaynti.append([solu, suunta])
+
                 if suunta == "alas" and solu.y < self.koko-1:
                     canvas.create_line(solu.x*20+6, solu.y*20+25,
                                        solu.x*20+25, solu.y*20+25, fill="white")
@@ -90,23 +84,26 @@ class BinaaripuuIkkuna:
         nopeus = tkinter.StringVar(self._frame)
         nopeus.set("0.07")
 
-        val_lista = [0.01, 0.07, 0.15, 0.5, 1]
+        val_lista = [0.001, 0.01, 0.07, 0.15, 0.5, 1]
 
-        button = ttk.Button(
+        takaisin_alkuuna_nappi = ttk.Button(
             master=self._frame,
             text="Mene takaisin alkuun",
-            command=self._aloitus_kasittely
-        ).pack()
-        button2 = ttk.Button(
+            command=self._aloitus_kasittely)
+
+        luo_uusi_labyrintti_nappi = ttk.Button(
             master=self._frame,
             text="Luo uusi labyrintti",
-            command=lambda: self._avaa_uudelleen_binaaripuu(self.koko)
-        ).pack()
-        button3 = ttk.Button(
+            command=lambda: self._avaa_uudelleen_binaaripuu(self.koko))
+
+        nayta_labyrintin_luominen_nappi = ttk.Button(
             master=self._frame,
             text="Näytä labyrintin luominen nopeudella",
             command=lambda: self.nayta_miten_luotu(
-                canvas, lapikaynti, float(nopeus.get()))
-        ).pack(side="left")
-        nopeus_valinta = tkinter.OptionMenu(
-            self._frame, nopeus, *val_lista).pack(side="right")
+                canvas, lapikaynti, float(nopeus.get())))
+
+        nopeus_valinta = tkinter.OptionMenu(self._frame, nopeus, *val_lista)
+        takaisin_alkuuna_nappi.pack()
+        luo_uusi_labyrintti_nappi.pack()
+        nayta_labyrintin_luominen_nappi.pack(side="left")
+        nopeus_valinta.pack(side="right")
