@@ -7,4 +7,4 @@ def start(ctx):
 
 @task
 def suorituskyky(ctx):
-    ctx.run("python3 koodi/testaus/suorituskyky.py")
+    ctx.run("python3 koodi/suorituskyky.py")
